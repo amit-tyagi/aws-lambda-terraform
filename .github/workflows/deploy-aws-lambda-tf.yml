@@ -2,13 +2,11 @@ name: 'Deploy AWS Lambda'
 
 on:
   push:
-    branches:
-    - main
-  pull_request:
+    branches: [ main ]
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy AWS Lambda Function
     runs-on: ubuntu-latest
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
