@@ -1,0 +1,1 @@
+# This is an example of Typescript lambda deployed with Terraform
