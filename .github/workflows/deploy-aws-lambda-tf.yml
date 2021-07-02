@@ -7,10 +7,9 @@ on:
   pull_request:
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-    environment: production
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -19,7 +18,7 @@ jobs:
 
     steps:
     # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
+    - name: Checkout code
       uses: actions/checkout@v2
 
     # Install the node dependencies
@@ -34,7 +33,8 @@ jobs:
     - name: Move node_modules to dist
       run: mv node_modules dist/node_modules  
 
-    - name: Zip the contents to be deployed
+    # Zip the contents to be deployed
+    - name: Zip
       run: (cd dist && zip -r ../function.zip .)  
 
     # Deploy to AWS
@@ -46,3 +46,6 @@ jobs:
         aws_region: ${{ secrets.AWS_REGION }}
         function_name: tf_function
         zip_file: function.zip
+        publish: true,
+        memory_size: 128
+        timeout: 10
