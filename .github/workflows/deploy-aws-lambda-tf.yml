@@ -46,6 +46,5 @@ jobs:
         aws_region: ${{ secrets.AWS_REGION }}
         function_name: tf_function
         zip_file: function.zip
-        publish: true,
         memory_size: 128
         timeout: 10
